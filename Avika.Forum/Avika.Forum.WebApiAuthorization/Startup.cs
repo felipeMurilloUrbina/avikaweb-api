@@ -38,10 +38,10 @@ namespace Avika.Forum.WebApiAuthorization
             {
                 //For Dev enviroment only (on production should be AllowInsecureHttp = false)
                 AllowInsecureHttp = true,
-                TokenEndpointPath = new PathString("/oauth2/token"),
+                TokenEndpointPath = new PathString("/token"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromMinutes(30),
                 Provider = new CustomOAuthProvider(),
-                AccessTokenFormat = new CustomJwtFormat("http://jwtauthzsrv.azurewebsites.net")
+                AccessTokenFormat = new CustomJwtFormat("")
             };
 
             // OAuth 2.0 Bearer Access Token Generation

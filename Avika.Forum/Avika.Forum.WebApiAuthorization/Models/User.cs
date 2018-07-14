@@ -31,6 +31,7 @@ namespace Avika.Forum.WebApiAuthorization.Models
         {
             var userIdentity = await manager.CreateIdentityAsync(this, authenticationType);
             // Add custom user claims here
+            userIdentity.AddClaim(new Claim(ClaimTypes.Role, "Admin" ));
             return userIdentity;
         }
     }

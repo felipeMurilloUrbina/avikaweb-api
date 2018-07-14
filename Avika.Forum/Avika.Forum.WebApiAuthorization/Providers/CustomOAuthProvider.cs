@@ -48,17 +48,22 @@ namespace Avika.Forum.WebApiAuthorization.Providers
         {
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
             var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
-            User user = await userManager.FindAsync(context.UserName, context.Password);
-
+            User user = null;
+            if(context.UserName.Contains("@"))
+                user = await userManager.FindByEmailAsync(context.UserName);
+            if(user==null)
+                user = await userManager.FindAsync(context.UserName, context.Password);
+            else
+                user = await userManager.FindAsync(user.UserName, context.Password);
             if (user == null)
             {
-                context.SetError("invalid_grant", "El usuario o contraseña son incorrectos");
+                context.SetError("incorrecto", "El usuario o contraseña son incorrectos");
                 return;
             }
 
             if (!user.EmailConfirmed)
             {
-                context.SetError("invalid_grant", "Usuario no registrado.");
+                context.SetError("incorrecto", "Usuario no registrado.");
                 return;
             }
             var props = new AuthenticationProperties(new Dictionary<string, string>
