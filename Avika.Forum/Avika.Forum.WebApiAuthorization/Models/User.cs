@@ -17,15 +17,16 @@ namespace Avika.Forum.WebApiAuthorization.Models
 
         public string LastName { get; set; }
         public string  RoleId { get; set; }
-
+        public int ? CompanyId { get; set; }
+        public int ? DepartmentId { get; set; }
         [Required]
         public DateTime JoinDate { get; set; }
+        public string Rfc { get; set; }
         public string Language { get; set; }
         public bool Active { get; set; }
         public string Avatar { get; set; }
         [ForeignKey("RoleId")]
         public IdentityRole Role { get; set; }
-
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager, string authenticationType)
         {

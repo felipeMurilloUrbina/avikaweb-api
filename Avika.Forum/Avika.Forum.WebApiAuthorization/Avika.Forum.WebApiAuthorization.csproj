@@ -249,6 +249,15 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\ApplicationUserManager.cs" />
+    <Compile Include="Migrations\201807181538062_InitialMigrations.cs" />
+    <Compile Include="Migrations\201807181538062_InitialMigrations.Designer.cs">
+      <DependentUpon>201807181538062_InitialMigrations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807181617383_agregarfc.cs" />
+    <Compile Include="Migrations\201807181617383_agregarfc.Designer.cs">
+      <DependentUpon>201807181617383_agregarfc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AudienceModel.cs" />
     <Compile Include="Models\ChangePasswordBindingModel.cs" />
     <Compile Include="Models\ModelFactory.cs" />
@@ -330,6 +339,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201807181538062_InitialMigrations.resx">
+      <DependentUpon>201807181538062_InitialMigrations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807181617383_agregarfc.resx">
+      <DependentUpon>201807181617383_agregarfc.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

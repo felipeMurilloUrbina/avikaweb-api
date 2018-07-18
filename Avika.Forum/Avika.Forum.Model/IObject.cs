@@ -6,5 +6,8 @@ using System.Threading.Tasks;
 
 namespace Avika.Forum.Model
 {
-
+    public interface IObject
+    {
+         int Id { get; set; }
+    }
 }
