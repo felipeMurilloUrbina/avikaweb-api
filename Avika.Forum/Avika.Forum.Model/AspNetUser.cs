@@ -22,7 +22,6 @@ namespace Avika.Forum.Model
         public string Id { get; set; } // Id (Primary key) (length: 128)
         public string Name { get; set; } // Name
         public string LastName { get; set; } // LastName
-        public string RoleId { get; set; } // RoleId (length: 128)
         public int? CompanyId { get; set; } // CompanyId
         public int? DepartmentId { get; set; } // DepartmentId
         public System.DateTime JoinDate { get; set; } // JoinDate
@@ -41,19 +40,23 @@ namespace Avika.Forum.Model
         public int AccessFailedCount { get; set; } // AccessFailedCount
         public string UserName { get; set; } // UserName (length: 256)
         public string Rfc { get; set; } // Rfc
+        public System.DateTime BirthDate { get; set; } // BirthDate
+        public System.DateTime? IncorporationDate { get; set; } // IncorporationDate
 
         // Reverse navigation
 
         /// <summary>
         /// Child AspNetRoles (Many-to-Many) mapped by table [AspNetUserRoles]
         /// </summary>
-        
-        // Foreign keys
-
-        /// <summary>
-        /// Parent AspNetRole pointed by [AspNetUsers].([RoleId]) (FK_dbo.AspNetUsers_dbo.AspNetRoles_RoleId)
-        /// </summary>
-        //public virtual AspNetRole AspNetRole { get; set; } // FK_dbo.AspNetUsers_dbo.AspNetRoles_RoleId
+        //public virtual System.Collections.Generic.ICollection<AspNetRole> AspNetRoles { get; set; } // Many to many mapping
+        ///// <summary>
+        ///// Child AspNetUserClaims where [AspNetUserClaims].[UserId] point to this entity (FK_dbo.AspNetUserClaims_dbo.AspNetUsers_UserId)
+        ///// </summary>
+        //public virtual System.Collections.Generic.ICollection<AspNetUserClaim> AspNetUserClaims { get; set; } // AspNetUserClaims.FK_dbo.AspNetUserClaims_dbo.AspNetUsers_UserId
+        ///// <summary>
+        ///// Child AspNetUserLogins where [AspNetUserLogins].[UserId] point to this entity (FK_dbo.AspNetUserLogins_dbo.AspNetUsers_UserId)
+        ///// </summary>
+        //public virtual System.Collections.Generic.ICollection<AspNetUserLogin> AspNetUserLogins { get; set; } // AspNetUserLogins.FK_dbo.AspNetUserLogins_dbo.AspNetUsers_UserId
 
         public AspNetUser()
         {

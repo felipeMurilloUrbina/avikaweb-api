@@ -17,7 +17,7 @@ namespace Avika.Forum.Model
 
     // News
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.0.0")]
-    public class News
+    public partial class News
     {
         public int Id { get; set; } // Id (Primary key)
         public int CategoryId { get; set; } // CategoryId
@@ -51,7 +51,10 @@ namespace Avika.Forum.Model
         {
             NewHasPhotoes = new System.Collections.Generic.List<NewHasPhoto>();
             Companies = new System.Collections.Generic.List<Company>();
+            InitializePartial();
         }
+
+        partial void InitializePartial();
     }
 
 }

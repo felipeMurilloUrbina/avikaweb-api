@@ -16,23 +16,20 @@ namespace Avika.Forum.WebApiAuthorization.Models
         public string Name { get; set; }
 
         public string LastName { get; set; }
-        public string  RoleId { get; set; }
         public int ? CompanyId { get; set; }
         public int ? DepartmentId { get; set; }
         [Required]
         public DateTime JoinDate { get; set; }
+        public DateTime BirthDate { get; set; }
+        public DateTime ? IncorporationDate { get; set; }
         public string Rfc { get; set; }
         public string Language { get; set; }
         public bool Active { get; set; }
         public string Avatar { get; set; }
-        [ForeignKey("RoleId")]
-        public IdentityRole Role { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager, string authenticationType)
         {
             var userIdentity = await manager.CreateIdentityAsync(this, authenticationType);
-            // Add custom user claims here
-            userIdentity.AddClaim(new Claim(ClaimTypes.Role, "Admin" ));
             return userIdentity;
         }
     }

@@ -35,6 +35,7 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IdentityModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -68,9 +69,9 @@
       <DependentUpon>AvikaDB.tt</DependentUpon>
     </Compile>
     <Compile Include="AvikaDB.cs">
+      <DependentUpon>AvikaDB.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AvikaDB.tt</DependentUpon>
     </Compile>
     <Compile Include="AvikaDBFactory.cs">
       <DependentUpon>AvikaDB.tt</DependentUpon>
@@ -91,6 +92,12 @@
       <DependentUpon>AvikaDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DepartmentConfiguration.cs">
+      <DependentUpon>AvikaDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Employee.cs">
+      <DependentUpon>AvikaDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeeConfiguration.cs">
       <DependentUpon>AvikaDB.tt</DependentUpon>
     </Compile>
     <Compile Include="FakeAvikaDB.cs">

@@ -17,7 +17,7 @@ namespace Avika.Forum.Model
 
     // NewHasPhotos
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.0.0")]
-    public class NewHasPhoto
+    public partial class NewHasPhoto
     {
         public int Id { get; set; } // Id (Primary key)
         public int NewId { get; set; } // NewId
@@ -33,6 +33,13 @@ namespace Avika.Forum.Model
         /// Parent News pointed by [NewHasPhotos].([NewId]) (FK_NewHasPhotos_News)
         /// </summary>
         public virtual News News { get; set; } // FK_NewHasPhotos_News
+
+        public NewHasPhoto()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
     }
 
 }

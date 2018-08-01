@@ -1,4 +1,5 @@
-﻿using Avika.Forum.WebApiAuthorization.Models;
+﻿using Avika.Forum.WebApiAuthorization.Infrastructure;
+using Avika.Forum.WebApiAuthorization.Models;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -10,10 +11,10 @@ using System.Web.Http;
 
 namespace Avika.Forum.WebApiAuthorization.Controllers
 {
-    [RoutePrefix("users")]
+    [RoutePrefix("api/users")]
     public class UsersController : BaseApiController
     {
-        [Authorize(Roles = "Admin")]
+        [CustomAuthorize(Role = "Administrador")]
         [Route("")]
         public IHttpActionResult GetUsers()
         {
@@ -23,7 +24,7 @@ namespace Avika.Forum.WebApiAuthorization.Controllers
             return Ok(this.AppUserManager.Users.ToList().Select(u => this.TheModelFactory.Create(u)));
         }
 
-        [Authorize(Roles = "Admin")]
+        [CustomAuthorize(Role = "Administrador")]
         [Route("user/{id:guid}", Name = "GetUserById")]
         public async Task<IHttpActionResult> GetUser(string Id)
         {
@@ -39,7 +40,7 @@ namespace Avika.Forum.WebApiAuthorization.Controllers
 
         }
 
-        [Authorize(Roles = "Admin")]
+        [CustomAuthorize(Role = "Administrador")]
         [Route("user/{username}")]
         public async Task<IHttpActionResult> GetUserByName(string username)
         {
@@ -138,7 +139,7 @@ namespace Avika.Forum.WebApiAuthorization.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = "Admin")]
+        [CustomAuthorize(Role = "Administrador")]
         [Route("user/{id:guid}")]
         public async Task<IHttpActionResult> DeleteUser(string id)
         {

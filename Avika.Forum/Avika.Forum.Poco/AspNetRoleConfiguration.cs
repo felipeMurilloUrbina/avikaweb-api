@@ -31,7 +31,7 @@ namespace Avika.Forum.Model
 
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("nvarchar").IsRequired().HasMaxLength(128).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.Name).HasColumnName(@"Name").HasColumnType("nvarchar").IsRequired().HasMaxLength(256);
-            HasMany(t => t.AspNetUsers_UserId).WithMany(t => t.AspNetRoles).Map(m =>
+            HasMany(t => t.AspNetUsers).WithMany(t => t.AspNetRoles).Map(m =>
             {
                 m.ToTable("AspNetUserRoles", "dbo");
                 m.MapLeftKey("RoleId");

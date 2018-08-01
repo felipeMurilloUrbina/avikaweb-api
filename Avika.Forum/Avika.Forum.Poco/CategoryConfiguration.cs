@@ -29,10 +29,11 @@ namespace Avika.Forum.Model
             ToTable("Categories", schema);
             HasKey(x => x.Id);
 
-            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.PatherId).HasColumnName(@"PatherId").HasColumnType("int").IsRequired();
             Property(x => x.Description).HasColumnName(@"Description").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(50);
-            Property(x => x.UserCreaterId).HasColumnName(@"UserCreaterId").HasColumnType("int").IsRequired();
+            Property(x => x.UserCreatorId).HasColumnName(@"UserCreatorId").HasColumnType("nvarchar").IsRequired().HasMaxLength(128);
+            Property(x => x.UserModificatorId).HasColumnName(@"UserModificatorId").HasColumnType("nvarchar").IsRequired().HasMaxLength(128);
             Property(x => x.DateCreation).HasColumnName(@"DateCreation").HasColumnType("datetime").IsRequired();
             Property(x => x.Active).HasColumnName(@"Active").HasColumnType("bit").IsRequired();
         }

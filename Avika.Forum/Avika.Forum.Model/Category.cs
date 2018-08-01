@@ -12,17 +12,20 @@
 #pragma warning disable 1591    //  Ignore "Missing XML Comment" warning
 
 
+using Avika.Forum.Model.Interfaces;
+
 namespace Avika.Forum.Model
 {
 
     // Categories
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.0.0")]
-    public class Category: IObject
+    public partial class Category
     {
         public int Id { get; set; } // Id (Primary key)
         public int PatherId { get; set; } // PatherId
         public string Description { get; set; } // Description (length: 50)
-        public int UserCreaterId { get; set; } // UserCreaterId
+        public string UserCreatorId { get; set; } // UserCreaterId (length: 128)
+        public string UserModificatorId { get; set; } // UserModificatorId (length: 128)
         public System.DateTime DateCreation { get; set; } // DateCreation
         public bool Active { get; set; } // Active
 

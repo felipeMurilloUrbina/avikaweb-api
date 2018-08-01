@@ -32,8 +32,11 @@ namespace Avika.Forum.DAO
             HasKey(x => x.Id);
 
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.UserCreatorId).HasColumnName(@"UserCreatorId").HasColumnType("nvarchar").IsRequired().HasMaxLength(128);
+            Property(x => x.UserModificatorId).HasColumnName(@"UserModificatorId").HasColumnType("nvarchar").IsRequired().HasMaxLength(128);
             Property(x => x.Description).HasColumnName(@"Description").HasColumnType("nvarchar").IsRequired().HasMaxLength(300);
             Property(x => x.Direccion).HasColumnName(@"Direccion").HasColumnType("varchar(max)").IsRequired().IsUnicode(false);
+            Property(x => x.Rfc).HasColumnName(@"RFC").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(50);
             Property(x => x.Active).HasColumnName(@"Active").HasColumnType("bit").IsRequired();
             Property(x => x.DateCreation).HasColumnName(@"DateCreation").HasColumnType("datetime").IsRequired();
             HasMany(t => t.News).WithMany(t => t.Companies).Map(m =>

@@ -30,8 +30,9 @@ namespace Avika.Forum.Model
             HasKey(x => x.Id);
 
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
-            Property(x => x.Description).HasColumnName(@"Description").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(300);
             Property(x => x.UserCreatorId).HasColumnName(@"UserCreatorId").HasColumnType("nvarchar").IsRequired().HasMaxLength(128);
+            Property(x => x.UserModificatorId).HasColumnName(@"UserModificatorId").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
+            Property(x => x.Description).HasColumnName(@"Description").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(300);
             Property(x => x.DateCreation).HasColumnName(@"DateCreation").HasColumnType("datetime").IsRequired();
             Property(x => x.Active).HasColumnName(@"Active").HasColumnType("bit").IsRequired();
         }

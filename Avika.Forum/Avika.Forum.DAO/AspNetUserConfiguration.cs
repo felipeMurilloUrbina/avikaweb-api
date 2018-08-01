@@ -34,7 +34,6 @@ namespace Avika.Forum.DAO
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("nvarchar").IsRequired().HasMaxLength(128).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.Name).HasColumnName(@"Name").HasColumnType("nvarchar(max)").IsOptional();
             Property(x => x.LastName).HasColumnName(@"LastName").HasColumnType("nvarchar(max)").IsOptional();
-            Property(x => x.RoleId).HasColumnName(@"RoleId").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
             Property(x => x.CompanyId).HasColumnName(@"CompanyId").HasColumnType("int").IsOptional();
             Property(x => x.DepartmentId).HasColumnName(@"DepartmentId").HasColumnType("int").IsOptional();
             Property(x => x.JoinDate).HasColumnName(@"JoinDate").HasColumnType("datetime").IsRequired();
@@ -53,8 +52,8 @@ namespace Avika.Forum.DAO
             Property(x => x.AccessFailedCount).HasColumnName(@"AccessFailedCount").HasColumnType("int").IsRequired();
             Property(x => x.UserName).HasColumnName(@"UserName").HasColumnType("nvarchar").IsRequired().HasMaxLength(256);
             Property(x => x.Rfc).HasColumnName(@"Rfc").HasColumnType("nvarchar(max)").IsOptional();
-
-            // Foreign keys
+            Property(x => x.BirthDate).HasColumnName(@"BirthDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.IncorporationDate).HasColumnName(@"IncorporationDate").HasColumnType("datetime").IsOptional();
         }
     }
 

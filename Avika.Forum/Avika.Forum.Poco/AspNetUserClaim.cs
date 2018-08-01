@@ -17,7 +17,7 @@ namespace Avika.Forum.Model
 
     // AspNetUserClaims
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.0.0")]
-    public class AspNetUserClaim
+    public partial class AspNetUserClaim
     {
         public int Id { get; set; } // Id (Primary key)
         public string UserId { get; set; } // UserId (length: 128)
@@ -30,6 +30,13 @@ namespace Avika.Forum.Model
         /// Parent AspNetUser pointed by [AspNetUserClaims].([UserId]) (FK_dbo.AspNetUserClaims_dbo.AspNetUsers_UserId)
         /// </summary>
         public virtual AspNetUser AspNetUser { get; set; } // FK_dbo.AspNetUserClaims_dbo.AspNetUsers_UserId
+
+        public AspNetUserClaim()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
     }
 
 }

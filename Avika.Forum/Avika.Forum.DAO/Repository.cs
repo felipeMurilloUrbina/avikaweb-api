@@ -1,8 +1,10 @@
-﻿using Avika.Forum.Model;
+﻿using Avika.Forum.LogDLL;
+using Avika.Forum.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,14 +12,41 @@ namespace Avika.Forum.DAO
 {
     public class Repository<T> where T: class, IObject
     {
-        readonly FakeAvikaDB _context = null;
-        public Repository(FakeAvikaDB context)
+        readonly Context _context = null;
+        readonly Logger _logger = null;
+        public Repository(Context context, Logger logger)
         {
-            this._context = context; 
+            this._context = context;
+            this._logger = logger;
         }
-        public async Task<ICollection<T>> Get()
+        public async Task<Pagination<T>> Get(int? page, int? qty)
         {
-            return this._context.Set<T>().ToList();
+            var totalItems = this._context.Set<T>().Count();
+            qty = qty == 0 ? totalItems : qty;
+            var totalPages = (int)Math.Ceiling((double)totalItems / (int)qty);
+            var items = this._context.Set<T>()
+                .OrderBy(c => c.Id)
+                .Skip(((int)page - 1) * (int)qty)
+                .Take((int)qty)
+                .ToList();
+            var result = new Pagination<T>()
+            {
+                ItemPerPage = (int)qty,
+                TotalItems = totalItems,
+                TotalPages = totalPages,
+                CurrentPage = (int)page,
+                Items = items
+            };
+            return result;
+        }
+        public async Task<T> GetId(int id)
+        {
+            return  this._context.Set<T>().Find(id);
+        }
+        public ICollection<T> FindBy(Expression<Func<T, bool>> predicate)
+        {
+            ICollection<T> query = _context.Set<T>().Where(predicate).ToList();
+            return query;
         }
         public async Task<int> Save(T TEntity)
         {
@@ -27,43 +56,54 @@ namespace Avika.Forum.DAO
             }
             else
             {
-                return await Update(TEntity);
+                return await Put(TEntity);
             }
-        }
-        public async Task<int> Delete(T TEntity)
-        {
-            await Task.Factory.StartNew(async () => {
-                _context.Entry<T>(TEntity).State = EntityState.Modified;
-                return await _context.SaveChangesAsync();
-            });
-            return 1;
         }
         public async Task<int> Delete(int id)
         {
             await Task.Factory.StartNew(async () => {
                 var tEntity=_context.Set<T>().Find(id);
                 _context.Entry<T>(tEntity).State = EntityState.Deleted;
-                return await _context.SaveChangesAsync();
+                return await SaveAsync();
             });
             return 1;
         }
-        async Task<int> Update(T TEntity)
+        public async Task<int> Delete(T TEntity)
         {
-             await Task.Factory.StartNew(async () => {
+                _context.Entry<T>(TEntity).State = EntityState.Modified;
+                return await SaveAsync();
+        }
+        private async Task<int> SaveAsync()
+        {
+            try
+            {
+                return _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                this._logger.EscribirError(e.ToString());
+                return -1;
+            }
+        }
+        async Task<int> Put(T TEntity)
+        {
+            try
+            {
                 _context.Set<T>();
                 _context.Entry<T>(TEntity).State = EntityState.Modified;
-                await _context.SaveChangesAsync();
-                return await _context.SaveChangesAsync();
-            });
-            return 1;
+                return await SaveAsync();
+            }
+            catch (Exception e)
+            {
+                this._logger.EscribirError(e.ToString());
+                return await Task.FromResult<int>(-1);
+            }
+                
         }
         async Task<int> Post(T TEntity)
         {
-            await Task.Factory.StartNew(async() => {
                 _context.Set<T>().Add(TEntity);
-                return await _context.SaveChangesAsync();
-            });
-            return 1;
+                return await SaveAsync();
         }
     }
 }

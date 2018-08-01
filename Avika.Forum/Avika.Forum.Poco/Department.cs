@@ -17,13 +17,29 @@ namespace Avika.Forum.Model
 
     // Departments
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.0.0")]
-    public class Department
+    public partial class Department
     {
         public int Id { get; set; } // Id (Primary key)
-        public string Description { get; set; } // Description (length: 300)
         public string UserCreatorId { get; set; } // UserCreatorId (length: 128)
+        public string UserModificatorId { get; set; } // UserModificatorId (length: 128)
+        public string Description { get; set; } // Description (length: 300)
         public System.DateTime DateCreation { get; set; } // DateCreation
         public bool Active { get; set; } // Active
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child Employees where [Employees].[DepartmentId] point to this entity (FK_Employees_Departments)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<Employee> Employees { get; set; } // Employees.FK_Employees_Departments
+
+        public Department()
+        {
+            Employees = new System.Collections.Generic.List<Employee>();
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
     }
 
 }

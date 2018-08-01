@@ -24,6 +24,7 @@ namespace Avika.Forum.Model
         System.Data.Entity.DbSet<Category> Categories { get; set; } // Categories
         System.Data.Entity.DbSet<Company> Companies { get; set; } // Companies
         System.Data.Entity.DbSet<Department> Departments { get; set; } // Departments
+        System.Data.Entity.DbSet<Employee> Employees { get; set; } // Employees
         System.Data.Entity.DbSet<NewHasPhoto> NewHasPhotoes { get; set; } // NewHasPhotos
         System.Data.Entity.DbSet<News> News { get; set; } // News
 

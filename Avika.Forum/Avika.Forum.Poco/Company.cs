@@ -17,16 +17,23 @@ namespace Avika.Forum.Model
 
     // Companies
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.0.0")]
-    public class Company
+    public partial class Company
     {
         public int Id { get; set; } // Id (Primary key)
+        public string UserCreatorId { get; set; } // UserCreatorId (length: 128)
+        public string UserModificatorId { get; set; } // UserModificatorId (length: 128)
         public string Description { get; set; } // Description (length: 300)
         public string Direccion { get; set; } // Direccion
+        public string Rfc { get; set; } // RFC (length: 50)
         public bool Active { get; set; } // Active
         public System.DateTime DateCreation { get; set; } // DateCreation
 
         // Reverse navigation
 
+        /// <summary>
+        /// Child Employees where [Employees].[CompanyId] point to this entity (FK_Employees_Companies)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<Employee> Employees { get; set; } // Employees.FK_Employees_Companies
         /// <summary>
         /// Child News (Many-to-Many) mapped by table [NewCompanies]
         /// </summary>
@@ -34,8 +41,12 @@ namespace Avika.Forum.Model
 
         public Company()
         {
+            Employees = new System.Collections.Generic.List<Employee>();
             News = new System.Collections.Generic.List<News>();
+            InitializePartial();
         }
+
+        partial void InitializePartial();
     }
 
 }
