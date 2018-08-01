@@ -8,25 +8,25 @@ using System.Threading.Tasks;
 
 namespace Avika.Forum.LogDLL
 {
-    public class Logger
+    public class Logger : ILogger
     {
-        public static string RUTA = "~/App_Data/errores";
-        string _ruta = "";
-        public Logger(string ruta)
+        public static string PATH = "~/App_Data/errores";
+        string _path = "";
+        public Logger(string path)
         {
-            this._ruta = ruta;
-            crearCarpetasDestino(this._ruta);
+            this._path = path;
+            crearCarpetasDestino(this._path);
         }
 
-        void crearCarpetasDestino(string ruta)
+        void crearCarpetasDestino(string path)
         {
-            if (!Directory.Exists(ruta))
+            if (!Directory.Exists(path))
             {
                 string rutaPegada = string.Empty;
-                var carpetas = ruta.Split(new[] { "\\" }, StringSplitOptions.None);
-                foreach (var carpeta in carpetas)
+                var folders = path.Split(new[] { "\\" }, StringSplitOptions.None);
+                foreach (var folder in folders)
                 {
-                    rutaPegada = Path.Combine(rutaPegada + @"\", carpeta);
+                    rutaPegada = Path.Combine(rutaPegada + @"\", folder);
                     if (!Directory.Exists(rutaPegada))
                         try
                         {
@@ -42,10 +42,11 @@ namespace Avika.Forum.LogDLL
         {
             try
             {
-                StreamWriter Adestino; string linea = DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
+                StreamWriter Adestino;
+                string linea = DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
                 linea += "(" + Thread.CurrentThread.ManagedThreadId.ToString() + ")";
                 linea += " - " + string.Format(formato, parametros);
-                string rutaCompleta = Path.Combine(_ruta, string.Format("Log.{0}.{1}.{2}.txt", DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year));
+                string rutaCompleta = Path.Combine(_path, string.Format("Log.{0}.{1}.{2}.txt", DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year));
                 Adestino = File.AppendText(rutaCompleta);
                 Adestino.WriteLine($"Error: {linea}");
                 Adestino.Close();
@@ -55,14 +56,14 @@ namespace Avika.Forum.LogDLL
             }
         }
 
-        public void EscribirLog(string error = null)
+        public void EscribirLog(string texto = null)
         {
             try
             {
                 StreamWriter Adestino; string linea = DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
                 linea += "(" + Thread.CurrentThread.ManagedThreadId.ToString() + ")";
-                linea += " - " + string.Format(error);
-                string rutaCompleta = Path.Combine(_ruta, string.Format("Peticiones.{0}.{1}.{2}.txt", DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year));
+                linea += " - " + string.Format(texto);
+                string rutaCompleta = Path.Combine(_path, string.Format("Peticiones.{0}.{1}.{2}.txt", DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year));
                 Adestino = File.AppendText(rutaCompleta);
                 Adestino.WriteLine($"Actividad: {linea}");
                 Adestino.Close();

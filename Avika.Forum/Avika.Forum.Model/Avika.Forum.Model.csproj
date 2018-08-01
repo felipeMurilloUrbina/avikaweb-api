@@ -38,6 +38,7 @@
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
@@ -60,7 +61,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="AspNetUser.cs" />
+    <Compile Include="Category.cs" />
+    <Compile Include="Company.cs" />
+    <Compile Include="Department.cs" />
+    <Compile Include="Employee.cs" />
+    <Compile Include="Extensions\Category.cs" />
+    <Compile Include="Extensions\Company.cs" />
+    <Compile Include="Extensions\Department.cs" />
+    <Compile Include="Extensions\Employee.cs" />
+    <Compile Include="Interfaces\ICatalogBasic.cs" />
+    <Compile Include="Interfaces\IDeleteLogic.cs" />
+    <Compile Include="IObject.cs" />
+    <Compile Include="NewHasPhoto.cs" />
+    <Compile Include="New.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

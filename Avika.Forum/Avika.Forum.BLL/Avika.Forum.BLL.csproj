@@ -40,6 +40,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,17 +49,42 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CategoryService.cs" />
+    <Compile Include="CompanyService.cs" />
+    <Compile Include="DepartmentService.cs" />
+    <Compile Include="EmployeeService.cs" />
+    <Compile Include="IDepartmentService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Smtp.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Avika.Forum.DAO\Avika.Forum.DAO.csproj">
+      <Project>{DEE04C2B-9F86-4B46-AE7A-A6970A9C12D5}</Project>
+      <Name>Avika.Forum.DAO</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Avika.Forum.LogDLL\Avika.Forum.LogDLL.csproj">
       <Project>{9cba8f3e-e2e5-4993-9567-e18b7fc053f8}</Project>
       <Name>Avika.Forum.LogDLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Avika.Forum.Model\Avika.Forum.Model.csproj">
+      <Project>{A861CF97-172D-419B-A725-2964D057CED2}</Project>
+      <Name>Avika.Forum.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

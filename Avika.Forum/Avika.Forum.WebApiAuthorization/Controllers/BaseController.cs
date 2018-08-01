@@ -8,12 +8,14 @@ using System.Net.Http;
 using Microsoft.AspNet.Identity.Owin;
 using Avika.Forum.WebApiAuthorization.Models;
 using Avika.Forum.WebApiAuthorization.Infrastructure;
+using Avika.Forum.LogDLL;
+using Avika.Forum.DAO;
 
 namespace Avika.Forum.WebApiAuthorization.Controllers
 {
     public class BaseApiController : ApiController
     {
-
+        public Logger _logger = null;
         private ModelFactory _modelFactory;
         private ApplicationUserManager _AppUserManager = null;
 
@@ -21,20 +23,15 @@ namespace Avika.Forum.WebApiAuthorization.Controllers
         {
             get
             {
+                
                 return _AppUserManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
         }
 
-        //protected ApplicationRoleManager AppRoleManager
-        //{
-        //    get
-        //    {
-        //        return _AppRoleManager ?? Request.GetOwinContext().GetUserManager<ApplicationRoleManager>();
-        //    }
-        //}
-
         public BaseApiController()
         {
+            _logger = new Logger(HttpContext.Current.Server.MapPath(Logger.PATH));
+
         }
 
         protected ModelFactory TheModelFactory
