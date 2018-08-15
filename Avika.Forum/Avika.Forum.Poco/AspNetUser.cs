@@ -14,6 +14,7 @@
 
 namespace Avika.Forum.Model
 {
+    using Avika.Forum.Model;
 
     // AspNetUsers
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.0.0")]

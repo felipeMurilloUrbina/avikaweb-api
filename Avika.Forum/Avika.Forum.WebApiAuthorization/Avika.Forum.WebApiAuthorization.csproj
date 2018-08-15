@@ -293,6 +293,10 @@
     <Compile Include="Migrations\201807241516225_agregaFechaNacimiento.Designer.cs">
       <DependentUpon>201807241516225_agregaFechaNacimiento.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808072231594_quitaCamposUsuario.cs" />
+    <Compile Include="Migrations\201808072231594_quitaCamposUsuario.Designer.cs">
+      <DependentUpon>201808072231594_quitaCamposUsuario.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AudienceModel.cs" />
     <Compile Include="Models\ChangePasswordBindingModel.cs" />
@@ -394,6 +398,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807241516225_agregaFechaNacimiento.resx">
       <DependentUpon>201807241516225_agregaFechaNacimiento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808072231594_quitaCamposUsuario.resx">
+      <DependentUpon>201808072231594_quitaCamposUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

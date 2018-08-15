@@ -43,10 +43,11 @@ namespace Avika.Forum.WebApiAuthorization.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>company </returns>
-        [HttpGet]
+        [Route("{id}"),HttpGet]
         public async Task<IHttpActionResult> GetId(int id)
         {
-            return Ok(_service.Get(id));
+            var res = await _service.Get(id);
+            return Ok(res);
         }
         /// <summary>
         /// Post to company
@@ -65,7 +66,7 @@ namespace Avika.Forum.WebApiAuthorization.Controllers
             if (String.IsNullOrEmpty(res))
                 return Ok(String.Format(Resources.SaveOk, _element));
             else
-                return BadRequest(String.Format(Resources.SaveError, _element));
+                return BadRequest(String.Format(res));
         }
         /// <summary>
         /// Update {company}
@@ -77,15 +78,13 @@ namespace Avika.Forum.WebApiAuthorization.Controllers
             if (company == null)
                 return BadRequest(String.Format(Resources.RequestEmpty, _element));
             var principal = RequestContext.Principal as ClaimsPrincipal;
+            company.UserCreatorId = principal.Identity.GetUserId();
             company.UserModificatorId = principal.Identity.GetUserId();
             var res = this._service.Put(company).Result;
-            switch (res)
-            {
-                case -1:
-                    return BadRequest(String.Format(Resources.UpdateError, _element));
-                default:
-                    return Ok(String.Format(Resources.UpdateOk, _element));
-            }
+            if (String.IsNullOrEmpty(res))
+                return Ok(String.Format(Resources.SaveOk, _element));
+            else
+                return BadRequest(String.Format(res));
 
         }
         /// <summary>

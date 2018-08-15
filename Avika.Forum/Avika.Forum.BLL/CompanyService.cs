@@ -37,13 +37,13 @@ namespace Avika.Forum.BLL
 
             return result > 0 ? "" : String.Format(Resources.SaveError, _element);
         }
-        public async Task<int> Put(Company company)
+        public async Task<string> Put(Company company)
         {
-            if (company.Id == 0)
-                return -1;
+            //if (company.Id == 0)
+            //    return "";
             var _company = await this._repository.GetId(company.Id);
             if (_company == null)
-                return -1;
+                return "";
             //_company.Name = company.Name ?? company.Name;
             //_company.LastName = company.LastName ?? _company.LastName;
             //_company.MotherLastName = company.MotherLastName ?? _company.MotherLastName;
@@ -56,7 +56,14 @@ namespace Avika.Forum.BLL
             //_company.DepartmentId = company.DepartmentId != 0 ? company.DepartmentId : _company.DepartmentId;
             //_company.CompanyId = company.CompanyId;
             _company.UserModificatorId = company.UserModificatorId;
-            return await this._repository.Save(_company);
+            _company.Code = company.Code;
+            _company.Description = company.Description;
+            _company.Address = company.Address;
+            var error = validate(company);
+            if (!string.IsNullOrEmpty(error))
+                return error;
+            var result = await this._repository.Save(_company);
+            return result > 0 ? "" : String.Format(Resources.SaveError, _element);
         }
         public async Task<int> Delete(int id)
         {
@@ -67,10 +74,19 @@ namespace Avika.Forum.BLL
         string validate(Company company)
         {
             if (String.IsNullOrEmpty(company.Description))
-                return String.Format(Resources.EmptyData, _element, "La razon sócial");
-            if (string.IsNullOrEmpty(company.Rfc))
-                return String.Format(Resources.EmptyData, _element, "El RFC");
-          
+                return String.Format(Resources.EmptyData, _element, "La razon social");
+            if (String.IsNullOrEmpty(company.Code))
+                return String.Format(Resources.EmptyData, _element, "La Clave");
+            var companies = _repository.FindBy(c => c.Code.Equals(company.Code) || c.Description.Equals(company.Description)).ToList();
+            if (companies.FirstOrDefault(x => x.Id == company.Id) != null)
+                return "";
+            foreach (var compTemp in companies)
+            {
+                if (company.Code.Equals(compTemp.Code))
+                    return String.Format(Resources.DuplicateData, "la clave", _element);
+                if (company.Description.Equals(compTemp.Description))
+                    return String.Format(Resources.DuplicateData, "La razón social", _element);
+            }
             return "";
         }
     }

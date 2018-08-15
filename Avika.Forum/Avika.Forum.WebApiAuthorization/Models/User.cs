@@ -16,12 +16,8 @@ namespace Avika.Forum.WebApiAuthorization.Models
         public string Name { get; set; }
 
         public string LastName { get; set; }
-        public int ? CompanyId { get; set; }
-        public int ? DepartmentId { get; set; }
         [Required]
         public DateTime JoinDate { get; set; }
-        public DateTime BirthDate { get; set; }
-        public DateTime ? IncorporationDate { get; set; }
         public string Rfc { get; set; }
         public string Language { get; set; }
         public bool Active { get; set; }

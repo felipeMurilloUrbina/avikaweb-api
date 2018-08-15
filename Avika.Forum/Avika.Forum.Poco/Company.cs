@@ -14,6 +14,7 @@
 
 namespace Avika.Forum.Model
 {
+    using Avika.Forum.Model;
 
     // Companies
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.0.0")]
@@ -22,9 +23,9 @@ namespace Avika.Forum.Model
         public int Id { get; set; } // Id (Primary key)
         public string UserCreatorId { get; set; } // UserCreatorId (length: 128)
         public string UserModificatorId { get; set; } // UserModificatorId (length: 128)
+        public string Code { get; set; } // Code (length: 10)
         public string Description { get; set; } // Description (length: 300)
-        public string Direccion { get; set; } // Direccion
-        public string Rfc { get; set; } // RFC (length: 50)
+        public string Address { get; set; } // Address
         public bool Active { get; set; } // Active
         public System.DateTime DateCreation { get; set; } // DateCreation
 

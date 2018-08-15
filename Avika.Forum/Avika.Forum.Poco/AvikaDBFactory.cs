@@ -14,6 +14,7 @@
 
 namespace Avika.Forum.Model
 {
+    using Avika.Forum.Model;
 
     public class AvikaDBFactory : System.Data.Entity.Infrastructure.IDbContextFactory<AvikaDB>
     {

@@ -41,7 +41,7 @@ namespace Avika.Forum.DAO
         }
         public async Task<T> GetId(int id)
         {
-            return  this._context.Set<T>().Find(id);
+            return this._context.Set<T>().Find(id);
         }
         public ICollection<T> FindBy(Expression<Func<T, bool>> predicate)
         {

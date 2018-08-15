@@ -12,10 +12,9 @@
 #pragma warning disable 1591    //  Ignore "Missing XML Comment" warning
 
 
-using Avika.Forum.Model;
-
-namespace Avika.Forum.DAO
+namespace Avika.Forum.Model
 {
+    using Avika.Forum.Model;
 
     // Companies
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.0.0")]
@@ -31,12 +30,12 @@ namespace Avika.Forum.DAO
             ToTable("Companies", schema);
             HasKey(x => x.Id);
 
-            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.UserCreatorId).HasColumnName(@"UserCreatorId").HasColumnType("nvarchar").IsRequired().HasMaxLength(128);
             Property(x => x.UserModificatorId).HasColumnName(@"UserModificatorId").HasColumnType("nvarchar").IsRequired().HasMaxLength(128);
+            Property(x => x.Code).HasColumnName(@"Code").HasColumnType("nchar").IsOptional().IsFixedLength().HasMaxLength(10);
             Property(x => x.Description).HasColumnName(@"Description").HasColumnType("nvarchar").IsRequired().HasMaxLength(300);
-            Property(x => x.Direccion).HasColumnName(@"Direccion").HasColumnType("varchar(max)").IsRequired().IsUnicode(false);
-            Property(x => x.Rfc).HasColumnName(@"RFC").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(50);
+            Property(x => x.Address).HasColumnName(@"Address").HasColumnType("varchar(max)").IsRequired().IsUnicode(false);
             Property(x => x.Active).HasColumnName(@"Active").HasColumnType("bit").IsRequired();
             Property(x => x.DateCreation).HasColumnName(@"DateCreation").HasColumnType("datetime").IsRequired();
             HasMany(t => t.News).WithMany(t => t.Companies).Map(m =>

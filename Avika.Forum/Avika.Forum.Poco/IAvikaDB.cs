@@ -14,6 +14,7 @@
 
 namespace Avika.Forum.Model
 {
+    using Avika.Forum.Model;
 
     public interface IAvikaDB : System.IDisposable
     {
